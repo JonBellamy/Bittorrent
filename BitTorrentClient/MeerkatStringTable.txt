@@ -1,0 +1,281 @@
+[MSG_OPEN_TORRENT]
+Select where to download the torrent files.
+
+[MSG_INVALID_TORRENT]
+The torrent: {0} is invalid
+
+[MSG_CONF_DEL_HEADER]
+Confirmation required
+
+[MSG_CONF_DEL_BODY]
+Are you sure you wish to remove the selected torrent and delete its associated .torrent file?
+
+[ABOUT_MSG]
+For more info visit: {0} http://www.themeerkat.net
+
+[ABOUT_DESC]
+"Meerkat is a simple, fast and secure BitTorrent client. For more information please visit the above homepage.
+
+[ABOUT_NEW_BUILD]
+A new build of Meerkat is available. Please visit the Meerkat homepage to download the latest version. This dialog can be disabled in the options menu.
+
+[MENU_ADD]
+Add Torrent
+
+[MENU_EXIT]
+Exit
+
+[MENU_OPTIONS]
+Options
+
+[MENU_ABOUT]
+About
+
+[STATUS_STRIP_DHT]
+Dht Nodes
+
+[RMENU_OPEN_FOLDER]
+Open Containing Folder
+
+[RMENU_REMOVE_TORRENT]
+Remove Torrent
+
+[RMENU_REMOVE__AND_DEL_TORRENT]
+Remove and Delete Torrent
+
+[RMENU_RESTART_TORRENT]
+Restart Torrent
+
+[RMENU_RECHECK_TORRENT]
+Force Recheck
+
+[RMENU_ALLOW_UNENCRYPTED]
+Allow unencrypted connections for the Torrent
+
+[T_NAME]
+Name
+
+[T_ID]
+Id
+
+[T_SIZE]
+Size
+
+[T_DONE]
+Done
+
+[T_Status]
+Status
+
+[T_SEEDS]
+Seeds
+
+[T_PEERS]
+Peers
+
+[T_DOWNSPEED]
+Down Speed
+
+[T_UPSPEED]
+Up Speed
+
+[T_ETA]
+Eta
+
+[T_STATUS_DL]
+Downloading
+
+[T_STATUS_QUEUED]
+Queued
+
+[T_STATUS_SEEDING]
+Seeding
+
+[T_STATUS_CHECKING]
+Checking
+
+[TIME_HOURS]
+Hours
+
+[TIME_MINUTES]
+Minutes
+
+[TIME_SECONDS]
+Seconds
+
+[OPT_HEADING]
+Meerkat Options
+
+[OPT_CONN_ENC]
+All connections must be encrypted
+
+[OPT_STOP_ON_COMP]
+Always stop torrents on completion
+
+[OPT_ENABLE_DHT]
+Enable Dht
+
+[OPT_USE_TRACKERS]
+Use Trackers
+
+[OPT_MAX_UL]
+Maximum upload rate (kB/s)
+
+[OPT_MAX_DL]
+Maximum download rate (kB/s)
+
+[OPT_INCOMING_PORT]
+Incoming connections port
+
+[DIALOG_GEN]
+General
+
+[DIALOG_GEN_TRANSFER]
+Transfer
+
+[DIALOG_GEN_ELAPSED]
+Time Elapsed
+
+[DIALOG_GEN_REMAINING]
+Remaining
+
+[DIALOG_GEN_SHARE]
+Share Ratio
+
+[DIALOG_GEN_DOWNLOADED]
+Downloaded
+
+[DIALOG_GEN_GENERAL]
+General
+
+[DIALOG_GEN_FN]
+Local Name
+
+[DIALOG_GEN_CREATED]
+Created On
+
+[DIALOG_GEN_HASH]
+Hash
+
+[DIALOG_GEN_PIECES]
+Pieces
+
+[DIALOG_GEN_TSIZE]
+Total Size
+
+[DIALOG_GEN_COMMENT]
+Comment
+
+[DIALOG_TRACKER]
+Tracker
+
+[DIALOG_TRACKER_URL]
+Url
+
+[DIALOG_TRACKER_UPDATE]
+Update In
+
+[DIALOG_TRACKER_SEEDS]
+Seeds
+
+[DIALOG_TRACKER_PEERS]
+Peers
+
+[DIALOG_TRACKER_INTERVAL]
+Interval
+
+[DIALOG_PEERS]
+Peers
+
+[DIALOG_PEERS_IP]
+Ip
+
+[DIALOG_PEERS_ID]
+Peer Id
+
+[DIALOG_PEERS_PERCENT]
+%
+
+[DIALOG_PEERS_DL]
+Down Speed
+
+[DIALOG_PEERS_UL]
+Up Speed
+
+[DIALOG_PEERS_REQUESTS]
+Reqs
+
+[DIALOG_PEERS_FLAGS]
+Flags
+
+[DIALOG_PEERS_CONN_TYPE]
+Connection Type
+
+[DIALOG_PEERS_DLD]
+Downloaded
+
+[DIALOG_PEERS_ULD]
+Uploaded
+
+[DIALOG_PEERS_CONN_LEN]
+Connection Length
+
+[DIALOG_PIECES]
+Pieces
+
+[DIALOG_PIECES_NUMBER]
+#
+
+[DIALOG_PIECES_SIZE]
+Size
+
+[DIALOG_PIECES_NUM_BLOCKS]
+# Blocks
+
+[DIALOG_PIECES_REQ_BLOCKS]
+Requested Blocks
+
+[DIALOG_PIECES_DL_BLOCKS]
+Downloaded Blocks
+
+[DIALOG_FILES]
+Files
+
+[DIALOG_FILES_NAME]
+Name
+
+[DIALOG_FILES_SIZE]
+Size
+
+[DIALOG_FILES_NUM_PIECES]
+# Pieces
+
+[DIALOG_FILES_PERCENT_DONE]
+% Done
+
+[DIALOG_GRAPH]
+Bandwidth
+
+[DIALOG_GRAPH_TITLE]
+Bandwidth Graph
+
+[DIALOG_GRAPH_Y_LABEL]
+kB per sec
+
+[DIALOG_GRAPH_X_LABEL]
+Time in minutes (From application start)
+
+[DIALOG_GRAPH_LEGEND_1]
+Current Torrent Download
+
+[DIALOG_GRAPH_LEGEND_2]
+Current Torrent Upload
+
+[DIALOG_GRAPH_LEGEND_3]
+Total Download
+
+[DIALOG_GRAPH_LEGEND_4]
+Total Upload
+
+[DIALOG_OUTPUT]
+Output

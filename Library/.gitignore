@@ -1,0 +1,52 @@
+obj
+bin
+debug
+release
+Debug
+Release
+*.[oa]
+*.csproj.*
+*.vcproj.*.user
+*.suo
+*.user
+*.cache
+*.ncb
+*.obj
+*.exp
+*.pdb
+*.pch
+*.ipch
+*.idb
+*.ilk
+*.dep
+*~
+*.swp
+*.trx
+TestResults
+*.opensdf
+*.sdf
+_ReSharper.*
+*ReSharper.user
+
+
+# xcode noise
+*.mode1v3
+*.pbxuser
+*.perspective 
+*.perspectivev3
+*.pyc 
+*~.nib/
+ide/xcode/build
+**/build/*
+
+# Textmate - if you build your xcode projects with it
+*.tm_build_errors
+
+# old skool
+.svn
+
+# osx noise
+.DS_Store
+profile
+
+docs

@@ -1,0 +1,83 @@
+#ifndef NAT_PMP_H
+#define NAT_PMP_H
+
+// TODO:
+// 3.2.1.  Announcing Address Changes
+// Staged retries
+
+
+#include "Network/UdpSocket.h"
+#include "Network/SockAddr.h"
+
+
+
+namespace net {
+
+
+
+class cNatPmp
+{
+public:
+	cNatPmp();
+
+private:
+	cNatPmp(const cNatPmp& rhs);
+	const cNatPmp& operator= (const cNatPmp& rhs);
+	bool operator== (const cNatPmp& rhs) const;
+
+public:
+
+	typedef void (*GetExternalIpCallback)	(bool success, const cIpAddr& ip);
+	typedef void (*PortMappingCallback)		(bool success, u16 internalPort, u16 externalPort);
+
+
+	void Process();
+
+	void GetExternalIp(GetExternalIpCallback cb);
+	void CreateTcpPortMapping(u16 internalPort, u16 externalPort, PortMappingCallback cb);
+	void CreateUdpPortMapping(u16 internalPort, u16 externalPort, PortMappingCallback cb);
+	void DestroyTcpPortMapping(u16 internalPort, u16 externalPort, PortMappingCallback cb);
+	void DestroyUdpPortMapping(u16 internalPort, u16 externalPort, PortMappingCallback cb);
+
+
+private:
+
+	void CreatePortMapping(u32 opCode, u16 internalPort, u16 externalPort, u32 duration, PortMappingCallback cb);
+
+	enum
+	{
+		NAT_PMP_VERSION = 0,
+		INITIAL_RETRANTMIT_MS = 250,
+		MAX_RETRIES = 9,
+		DEFAULT_PORT_MAPPING_DURATION = 3600
+	};
+
+	typedef enum
+	{
+		NAT_SUCCESS=0,
+		NAT_UNSUPPORTED_VERSION,
+		NAT_NOT_AUTHORISED_REFUSED,			// Supported but disabled
+		NAT_NETWORK_FAILURE,
+		NAT_OUT_OF_RESOURCES,				// No more mappings available
+		NAT_UNSUPPORTED_OPCODE
+	}ResultCode;
+
+	typedef enum
+	{
+		NAT_GET_EXTERNAL_IP = 0,
+		NAT_CREATE_UDP_PORT_MAPPING = 1,
+		NAT_CREATE_TCP_PORT_MAPPING = 2
+	}OpCode;
+
+
+	cUdpSocket mSocket;
+};
+
+extern cNatPmp& NatPmp();
+
+
+
+} // namespace net
+
+
+#endif // NAT_PMP_H

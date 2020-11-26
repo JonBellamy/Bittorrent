@@ -1,0 +1,554 @@
+// BitTorrent_Dll.cpp : Defines the exported functions for the DLL application.
+//
+
+#include "stdafx.h"
+#include "BitTorrent_Dll.h"
+
+#include <stdio.h>
+#include <io.h>
+#include <fcntl.h>
+#include <list>
+#include <vector>
+
+
+#include <Network/BitTorrent/dht/Dht.h>
+#include <Network/BitTorrent/BitTorrentPeer.h>
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY DebugDll()
+{
+	Printf("DebugDll\r\n");
+}
+
+
+/*
+extern "C" __declspec (dllexport) void APIENTRY SetStdOutHandle(HANDLE hStdOut)
+{
+	//BOOL ret = SetStdHandle(STD_OUTPUT_HANDLE, hStdOut);
+	int fd = _open_osfhandle( (intptr_t) hStdOut, _O_APPEND); 
+	FILE* fp = _fdopen(fd, "w"); 
+	*stdout = *fp; 
+	setvbuf(stdout, NULL, _IONBF, 0);  
+	Printf("redirecting std out\n");
+}// END SetStdOutHandle
+*/
+
+
+extern "C" __declspec (dllexport) void APIENTRY SetDebugStringOutputCb(DebugStringOutputCb cb)
+{
+	SetPrintfHandler(cb);
+}// END SetDebugStringOutputCb
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY InitTorrentManager(const char* appDataFolder)
+{
+	BitTorrentManager().Init(appDataFolder);
+}// END InitTorrentManager
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY DeInitTorrentManager()
+{
+}// END DeInitTorrentManager
+
+
+
+extern "C" __declspec (dllexport) u32 APIENTRY AddTorrent(const char* fn, const char* rootDir)
+{
+	TorrentHandle handle = BitTorrentManager().AddTorrent(fn, rootDir);
+	if(handle != INVALID_TORRENT_HANDLE)
+	{
+		cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(handle);
+		pTorrent->Start();
+	}
+	return handle;
+}// END AddTorrent
+
+
+
+extern "C" __declspec (dllexport) BOOL APIENTRY RemoveTorrent(u32 torrentId)
+{
+	return BitTorrentManager().RemoveTorrent(torrentId);
+}// END RemoveTorrent
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY UpdateTorrentManager()
+{
+	BitTorrentManager().Process();
+}// END UpdateTorrentManager
+
+
+
+
+
+extern "C" __declspec (dllexport) BOOL APIENTRY SaveTorrentManagerState()
+{
+	return BitTorrentManager().SaveState();
+}// END SaveTorrentManagerState
+
+
+extern "C" __declspec (dllexport) BOOL APIENTRY LoadTorrentManagerState()
+{
+	return BitTorrentManager().LoadState();
+}// END LoadTorrentManagerState
+
+
+
+extern "C" __declspec (dllexport) BOOL APIENTRY TorrentValid(u32 torrentId)
+{
+	return (BitTorrentManager().GetTorrent(torrentId) != NULL);
+}// END TorrentValid
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY TorrentForceRecheck(u32 torrentId)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	if(pTorrent == NULL)
+	{
+		return;
+	}
+	pTorrent->Recheck();
+}// END TorrentForceRecheck
+
+
+
+extern "C" __declspec (dllexport) BOOL APIENTRY IsDhtRunning()
+{
+	return BitTorrentManager().DhtTaskManager().Running();
+}// END IsDhtRunning
+
+
+
+extern "C" __declspec (dllexport) u32 APIENTRY NumberOfDhtNodes()
+{
+	return BitTorrentManager().DhtTaskManager().Dht().RoutingTable().Size();
+}// END NumberOfDhtNodes
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY SetListenerPort(u16 port)
+{
+	BitTorrentManager().SetIncomingConnectionsListener(port);
+}// END SetListenerPort
+
+
+
+extern "C" __declspec (dllexport) u16 APIENTRY GetListenerPort()
+{
+	return BitTorrentManager().ListenPort();
+}// END GetListenerPort
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY StartTorrent(u32 torrentId)
+{
+	BitTorrentManager().StartTorrent(torrentId);
+}// END StartTorrent
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY StopTorrent(u32 torrentId)
+{
+	BitTorrentManager().StopTorrent(torrentId);
+}// END StopTorrent
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY PauseTorrent(u32 torrentId)
+{
+	BitTorrentManager().PauseTorrent(torrentId);
+}// END PauseTorrent
+
+
+
+extern "C" __declspec (dllexport) u32 APIENTRY TotalDownloadRate()
+{
+	return BitTorrentManager().DownloadRate();
+}// END TotalDownloadRate
+
+
+
+extern "C" __declspec (dllexport) u32 APIENTRY TotalUploadRate()
+{
+	return BitTorrentManager().UploadRate();
+}// END TotalUploadRate
+
+
+extern "C" __declspec (dllexport) u32 APIENTRY TimeTorrentManagerRunning()
+{
+	return BitTorrentManager().TimeTorrentManagerRunning();
+}// END TimeTorrentManagerRunning
+
+
+extern "C" __declspec (dllexport) void APIENTRY GetTorrentClientOptions(sTorrentOptions& optionsOut)
+{
+	optionsOut = BitTorrentManager().Options();
+}// END GetTorrentClientOptions
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY SetTorrentClientOptions(sTorrentOptions options)
+{
+	BitTorrentManager().Options() = options;
+	BitTorrentManager().OnOptionsUdated();
+}
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY SetTorrentOnlyUsesEncryptedConnections(u32 torrentId, BOOL allow)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	if(pTorrent == NULL)
+	{
+		return;
+	}
+	pTorrent->ConnectionsMustBeEncrypted(allow!=0);
+}// END SetTorrentOnlyUsesEncyptedConnections
+
+
+
+extern "C" __declspec (dllexport) BOOL APIENTRY DoesTorrentOnlyUsesEncryptedConnections(u32 torrentId)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	if(pTorrent == NULL)
+	{
+		return false;
+	}
+	return pTorrent->ConnectionsMustBeEncrypted();
+}// END DoesTorrentOnlyUsesEncyptedConnections
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY DisconnectAllUnencryptedPeers(u32 torrentId)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	if(pTorrent == NULL)
+	{
+		return;
+	}
+	pTorrent->DisconnectAllUnencryptedPeers();
+}// END DisconnectAllUnencryptedPeers
+
+
+extern "C" __declspec (dllexport) void APIENTRY GetAllTorrentHandles(sTorrentHandles& handleArray)
+{
+	handleArray.mNumHanles = BitTorrentManager().GetAllTorrentHandles(&(handleArray.mHandles[0]), 64);
+}// END GetAllTorrentHandles
+
+
+
+extern "C" __declspec (dllexport) void APIENTRY GetTorrentMetaData(u32 torrentId, TorrentMetaData& meta)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+	if(pTorrent)
+	{
+		meta.mHandle = torrentId;
+
+		meta.mState = pTorrent->State();
+
+		memset(meta.mName, 0, sizeof(meta.mName));
+		strcpy_s(meta.mName, sizeof(meta.mName), pTorrent->MetaFile().Name().c_str());
+
+		memset(meta.mFileName, 0, sizeof(meta.mFileName));
+		strcpy_s(meta.mFileName, sizeof(meta.mFileName), pTorrent->FileName().c_str());
+
+		memset(meta.mComment, 0, sizeof(meta.mComment));
+		strcpy_s(meta.mComment, sizeof(meta.mComment), pTorrent->MetaFile().Comment().c_str());
+
+		assert(sizeof(meta.mInfoHash) == INFO_HASH_LENGTH);
+		memcpy(meta.mInfoHash, pTorrent->InfoHash(), INFO_HASH_LENGTH);
+
+		meta.mCreationDate = pTorrent->MetaFile().CreationDate();
+		meta.mTotalPieces = pTorrent->FileSet().NumberOfPieces();
+		meta.mPiecesDownloaded = pTorrent->NumberOfPiecesDownloaded();
+		meta.mPieceSize = pTorrent->FileSet().PieceSize();
+		meta.mTotalSize = pTorrent->FileSet().TotalFileSize();
+		meta.mTimeSinceStarted = pTorrent->TimeSinceStarted();
+		meta.mEta = pTorrent->Eta();
+		meta.mDownloadSpeed = pTorrent->DownloadRate();
+		meta.mUploadSpeed = pTorrent->UploadRate();
+		meta.mEventFlags = pTorrent->EventFlagsAsU32();
+		meta.mNumEncryptedConnections = pTorrent->NumberOfEncryptedConnections();
+		meta.mNumUnencryptedConnections = pTorrent->NumberOfUnencryptedConnections();
+		meta.mNumSeeds = pTorrent->NumberOfSeeds();
+		meta.mNumPeers = pTorrent->NumberOfPeers();
+		pTorrent->ClearAllEventFlags();
+	}
+}// END GetTorrentMetaData
+
+
+
+extern "C" __declspec (dllexport) u32 NumberOfConnectedPeers(u32 torrentId)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+	if(pTorrent)
+	{
+		return pTorrent->NumberOfPeerConnections();
+	}
+	return 0;
+}// END NumberOfConnectedPeers
+
+
+
+/*
+extern "C" __declspec (dllexport) int ArrayTest(void** pOut)
+{
+	sPeerInfo *arPtr = new sPeerInfo[10];
+
+
+	for(int n = 0; n < 10; n++)
+	{
+		//*arPtr++ = n;
+		arPtr[n].ip = 5;
+		arPtr[n].port = n+1;
+	}
+
+	*pOut = arPtr;
+	return 10;
+}
+*/
+
+
+extern "C" __declspec (dllexport) u32 GetConnectedPeersInfo(u32 torrentId, sPeerInfo** pOut, u32 maxItems)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+
+	u32 numItems=0;
+	if(pTorrent)
+	{
+		std::vector<const cTorrentPeer*> peerList;
+		pTorrent->GetAllConnectedPeers(peerList);
+
+		numItems = min(maxItems, peerList.size());
+		for(u32 i = 0; i < numItems; i++)
+		{
+			sPeerInfo* addr = *pOut++;
+
+			memcpy(addr->mPeerId, peerList[i]->PeerId(), 20); 
+
+			addr->mIp[0]  = peerList[i]->Address().Ip().GetB1();
+			addr->mIp[1]  = peerList[i]->Address().Ip().GetB2();
+			addr->mIp[2]  = peerList[i]->Address().Ip().GetB3();
+			addr->mIp[3]  = peerList[i]->Address().Ip().GetB4();
+			addr->mPort   = peerList[i]->Address().Port();
+			addr->mDlRate = peerList[i]->DownloadRate();
+			addr->mUlRate = peerList[i]->UploadRate();
+			addr->mTotalBytesDownloaded = peerList[i]->TotalBytesDownloaded();
+			addr->mTotalBytesUploaded = peerList[i]->TotalBytesUploaded();			
+			addr->mOustandingDownloadRequests = peerList[i]->NumberOfOutstandingDownloadBlocks();
+			addr->mOustandingUploadRequests = peerList[i]->NumberOfOutstandingUploadBlocks();			
+			addr->mConnectionLengthInSeconds = (peerList[i]->ConnectionLength() / 1000);
+
+			addr->mAmChoking = peerList[i]->AmChoking();
+			addr->mIsChokingMe = peerList[i]->IsChokingMe();
+			addr->mAmInterested = peerList[i]->AmInterested();
+			addr->mIsInterestedInMe = peerList[i]->IsInterestedInMe();
+
+			addr->mPercentageDone = peerList[i]->PercentageDone();
+
+			addr->mIsSeed = peerList[i]->IsSeed();
+
+			addr->mConnectionFlags = 0;
+			if(peerList[i]->Socket().WasIncomingConnection())
+			{
+				addr->mConnectionFlags |= sPeerInfo::INCOMING_CONNECTION;
+			}
+			if(peerList[i]->Socket().IsEncryptedConnection())
+			{
+				addr->mConnectionFlags |= sPeerInfo::ENCRYPTED_CONNECTION;
+			}
+		}
+	}
+	return numItems;
+}// END GetConnectedPeersInfo
+
+
+
+/*
+typedef struct
+{
+	char mUrl[512];
+	u32 mNextUpdateMs;
+
+}sAnnounceInfo;
+*/
+extern "C" __declspec (dllexport) u32 NumberOfAnnounceTargets(u32 torrentId)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+	if(pTorrent)
+	{
+		return BitTorrentManager().AnnounceManager().NumberOfAnnounceTargets(pTorrent);
+	}
+	return 0;	
+}// END NumberOfAnnounceTargets
+
+
+
+extern "C" __declspec (dllexport) u32 GetAnnounceTargetsInfo(u32 torrentId, cAnnounceManager::AnnounceDetails** pOut, u32 maxItems)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+
+	u32 numItems=0;
+	if(pTorrent)
+	{
+		numItems = min(maxItems, BitTorrentManager().AnnounceManager().NumberOfAnnounceTargets(pTorrent));
+		for(u32 i = 0; i < numItems; i++)
+		{
+			cAnnounceManager::AnnounceDetails* pAnnounceOut = *pOut++;
+			*pAnnounceOut = BitTorrentManager().AnnounceManager().GetAnnounceDetails(pTorrent, i);
+		}
+	}
+	return numItems;
+}// END GetAnnounceTargetsInfo
+
+/*
+typedef struct
+{
+	u32 mPieceNumber;
+	u32 mNumberOfBlocks;
+	u32 mCompletedBlocks;
+	u32 mOutstandingBlocks;
+	u32 mRequestedBlocks;
+	BOOL mIsFinalPiece;
+}sPiecesInfo;
+*/
+extern "C" __declspec (dllexport) u32 NumberOfActivePieces(u32 torrentId)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+	if(pTorrent)
+	{
+		return pTorrent->NumberOfPiecesDownloading();
+	}
+	return 0;
+}// END NumberOfActivePieces
+
+
+
+extern "C" __declspec (dllexport) u32 GetActivePiecesInfo(u32 torrentId, sPiecesInfo** pOut, u32 maxItems)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+
+	u32 numItems=0;
+	if(pTorrent)
+	{
+		const cBitTorrent::TorrentPieceVector& piecesArray = pTorrent->DownloadingPiecesArray();
+		numItems = min(maxItems, pTorrent->NumberOfPiecesDownloading());
+
+		for(u32 i = 0; i < numItems; i++)
+		{
+			pOut[i]->mPieceNumber = piecesArray[i]->PieceNumber();
+			pOut[i]->mPieceSize = piecesArray[i]->PieceSize();
+			pOut[i]->mNumberOfBlocks = piecesArray[i]->NumberOfBlocks();
+			pOut[i]->mCompletedBlocks = piecesArray[i]->NumberOfCompletedBlocks();			
+			pOut[i]->mOutstandingBlocks = piecesArray[i]->NumberOfOutstandingBlocks();
+			pOut[i]->mRequestedBlocks = piecesArray[i]->NumberOfRequestedBlocks();
+		}
+
+		return numItems;
+	}
+	return 0;
+}// END GetActivePiecesInfo
+
+
+
+/*
+typedef struct
+{
+	char mszFilename[512];
+	s64 mSize;
+	u32 mPercentageComplete;
+	u32 mNumberOfPieces;
+}sFileInfo;
+*/
+extern "C" __declspec (dllexport) u32 NumberOfFilesInTorrent(u32 torrentId)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+	if(pTorrent)
+	{
+		return pTorrent->FileSet().NumberOfFiles();
+	}
+	return 0;
+}// END NumberOfFilesInTorrent
+
+
+
+extern "C" __declspec (dllexport) u32 GetTorrentFilesInfo(u32 torrentId, sFileInfo** pOut, u32 maxItems)
+{
+	cBitTorrent* pTorrent = BitTorrentManager().GetTorrent(torrentId);
+	assert(pTorrent);
+
+	u32 numItems=0;
+	if(pTorrent)
+	{
+		numItems = min(maxItems, pTorrent->FileSet().NumberOfFiles());
+
+		for(u32 fileIndex = 0; fileIndex < numItems; fileIndex++)
+		{
+			strcpy_s(pOut[fileIndex]->mszFilename, sizeof(pOut[fileIndex]->mszFilename), pTorrent->FileSet().FileName(fileIndex).c_str());
+			pOut[fileIndex]->mSize = pTorrent->FileSet().FileSize(fileIndex);			
+			
+			u32 fileNumPieces = pTorrent->FileSet().NumPiecesFileIsSpreadOver(fileIndex);
+			pOut[fileIndex]->mNumberOfPieces = fileNumPieces;
+
+			// % complete			
+			u32 numHave=0;
+			for(u32 i=0; i < fileNumPieces; i++)
+			{
+				u32 pieceNum = pTorrent->FileSet().FileStartPiece(fileIndex) + i;
+				if(pTorrent->HavePiece(pieceNum))
+				{
+					numHave++;
+				}
+			}
+			float onePercent = (float)(fileNumPieces) / 100.0f;
+			float percentage = (float)(numHave) / onePercent;
+			pOut[fileIndex]->mPercentageComplete = percentage;
+		}
+
+		return numItems;
+	}
+	return 0;
+}// END GetActivePiecesInfo
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+// Events
+
+
+extern "C" __declspec (dllexport) void APIENTRY AddTorrentAddedCallback(TorrentAddedCallback cb)
+{
+	BitTorrentManager().AddTorrentAddedCallback(cb, NULL);
+}
+
+
+extern "C" __declspec (dllexport) void APIENTRY AddTorrentRemovedCallback(TorrentRemovedCallback cb)
+{
+	BitTorrentManager().AddTorrentRemovedCallback(cb, NULL);
+}
+
+
+extern "C" __declspec (dllexport) void APIENTRY RemoveTorrentAddedCallback(TorrentAddedCallback cb)
+{
+	BitTorrentManager().RemoveTorrentAddedCallback(cb, NULL);
+	
+}
+
+
+extern "C" __declspec (dllexport) void APIENTRY RemoveTorrentRemovedCallback(TorrentRemovedCallback cb)
+{
+	BitTorrentManager().RemoveTorrentRemovedCallback(cb, NULL);
+}

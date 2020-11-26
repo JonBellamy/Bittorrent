@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Network">
+      <UniqueIdentifier>{e69b062a-333c-437f-a992-dda8f18c0954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network\BitTorrent">
+      <UniqueIdentifier>{0507fa2c-7ec1-4d70-a2df-2099b5f94a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network\BitTorrent\Bencoding">
+      <UniqueIdentifier>{bb84efc1-969a-4c91-b1be-fa1030a74b18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network\BitTorrent\Dht">
+      <UniqueIdentifier>{aa4d4874-77d1-4c56-a328-556198dfff6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network\BitTorrent\Mse">
+      <UniqueIdentifier>{eb953ed8-8b79-4cc8-9df0-396a2a5fdd5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network\Http">
+      <UniqueIdentifier>{806493f6-9a80-4bb9-854e-3e55f50857c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network\Soap">
+      <UniqueIdentifier>{4680c699-26ec-401a-9fba-bd5403c37de8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\File">
+      <UniqueIdentifier>{8458015c-e2c8-427b-8d0f-4bc5a571d583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Containers">
+      <UniqueIdentifier>{ef150f2f-4d2c-4a9b-8a39-0105f5ef5ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\General">
+      <UniqueIdentifier>{c317aeb1-9998-47e7-847c-33a727362f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Maths">
+      <UniqueIdentifier>{5b7148e1-5020-410d-9fcb-410f2c3f2e1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Xml">
+      <UniqueIdentifier>{c62cf558-7774-4d24-be69-832b6daa6381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Network\Upnp">
+      <UniqueIdentifier>{6f00795d-e911-4602-848c-13d9692ae56e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BitTorrent_Dll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\bytestream.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\Dns.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\HtmlPacketLog.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\IpAddr.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\NetworkAdaptorList.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\SockAddr.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\SslSocket.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\TcpSocket.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\UdpSocket.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\Url.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\WinSock.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\AnnounceManager.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrent.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrentManager.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrentMessages.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrentMetaFile.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrentPeer.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\FilePieceSet.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\MessagePump.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\Piece.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\RequestQueue.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\TorrentOptions.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\TorrentPacketLog.cpp">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedDictionary.cpp">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedInt.cpp">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedList.cpp">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedString.cpp">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedType.cpp">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\Dht.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\DhtPacketLog.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\DhtTask.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\DhtTaskManager.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\KrpcMsg.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\Node.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\NodeId.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\ResourceContactInfo.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\RoutingTable.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\TaskBehaviours.cpp">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\BitTorrent\Mse\MessageStreamEncryption.cpp">
+      <Filter>Source Files\Network\BitTorrent\Mse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\HTTP\HttpClient.cpp">
+      <Filter>Source Files\Network\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\HTTP\HttpHeader.cpp">
+      <Filter>Source Files\Network\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\HTTP\HttpMessage.cpp">
+      <Filter>Source Files\Network\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\SOAP\Soap.cpp">
+      <Filter>Source Files\Network\Soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\SOAP\SoapEnvelope.cpp">
+      <Filter>Source Files\Network\Soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\SOAP\SoapTypes.cpp">
+      <Filter>Source Files\Network\Soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\File\file.cpp">
+      <Filter>Source Files\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\File\FileHelpers.cpp">
+      <Filter>Source Files\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Containers\Bitfield.cpp">
+      <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\General\Rand.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\General\Timer.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Math\MathHelpers.cpp">
+      <Filter>Source Files\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\3rdParty\TinyXml\tinystr.cpp">
+      <Filter>Source Files\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\3rdParty\TinyXml\tinyxml.cpp">
+      <Filter>Source Files\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\3rdParty\TinyXml\tinyxmlerror.cpp">
+      <Filter>Source Files\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\3rdParty\TinyXml\tinyxmlparser.cpp">
+      <Filter>Source Files\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\General\Printf.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\General\StringUtil.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\Base64.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\Upnp\UpnpIgd.cpp">
+      <Filter>Source Files\Network\Upnp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\General\_Assert.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\General\Lock.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="MeerkatLock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BitTorrent_Dll.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Types.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\bytestream.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\Dns.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\HtmlPacketLog.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\IpAddr.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\NetworkAdaptorList.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\Ports.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\SockAddr.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\SslSocket.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\TcpSocket.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\UdpSocket.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\Url.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\WinSock.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\AnnounceManager.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrent.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentManager.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentMessages.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentMetaFile.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentPeer.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentValues.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\FilePieceSet.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\MessagePump.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\Piece.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\RequestQueue.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\TorrentOptions.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\TorrentPacketLog.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedDictionary.h">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedInt.h">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedList.h">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedString.h">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedType.h">
+      <Filter>Source Files\Network\BitTorrent\Bencoding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\Dht.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\DhtPacketLog.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\DhtTask.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\DhtTaskManager.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\KrpcMsg.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\Node.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\NodeId.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\ResourceContactInfo.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\RoutingTable.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\SortObjects.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\TaskBehaviours.h">
+      <Filter>Source Files\Network\BitTorrent\Dht</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\Mse\MessageStreamEncryption.h">
+      <Filter>Source Files\Network\BitTorrent\Mse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\HTTP\HttpClient.h">
+      <Filter>Source Files\Network\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\HTTP\HttpHeader.h">
+      <Filter>Source Files\Network\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\HTTP\HttpMessage.h">
+      <Filter>Source Files\Network\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\SOAP\Soap.h">
+      <Filter>Source Files\Network\Soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\SOAP\SoapEnvelope.h">
+      <Filter>Source Files\Network\Soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\SOAP\SoapTypes.h">
+      <Filter>Source Files\Network\Soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\File\file.h">
+      <Filter>Source Files\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\File\FileHelpers.h">
+      <Filter>Source Files\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Containers\Bitfield.h">
+      <Filter>Source Files\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\Endianness.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\Rand.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\Timer.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Math\MathHelpers.h">
+      <Filter>Source Files\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\3rdParty\TinyXml\tinystr.h">
+      <Filter>Source Files\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\3rdParty\TinyXml\tinyxml.h">
+      <Filter>Source Files\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\Printf.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentCallbacks.h">
+      <Filter>Source Files\Network\BitTorrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\StringUtil.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\Base64.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\Network\Upnp\UpnpIgd.h">
+      <Filter>Source Files\Network\Upnp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\Singleton.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\_Assert.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\CallbackSet.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\General\Lock.h">
+      <Filter>Source Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="MeerkatLock.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>

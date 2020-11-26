@@ -1,0 +1,74 @@
+#ifndef NAT_PMP_MSGS_H
+#define NAT_PMP_MSGS_H
+
+
+// byte-align structures
+#ifdef _MSC_VER
+	#pragma pack( push, packing )
+	#pragma pack( 1 )
+	#define PACK_STRUCT
+#elif defined( __GNUC__ )
+	#define PACK_STRUCT	__attribute__((packed))
+#else
+	#error you must byte-align these structures with the appropriate compiler directives
+#endif
+
+
+
+namespace net {
+
+
+	typedef struct
+	{
+		u8 mVersion;
+		u8 mOpCode;
+	}sNatPmpPacketHeader;
+
+
+	typedef struct
+	{
+		sNatPmpPacketHeader mHeader;
+		u16 mResultCode;
+		u32 mSecondsSinceGatewayRebooted;
+	}sNatPmpPacketResultHeader;
+
+
+	typedef struct
+	{
+		sNatPmpPacketResultHeader mHeader;
+		u32 mIpAddr;
+	}sGetExternalIpResult;
+
+
+	typedef struct
+	{
+		sNatPmpPacketHeader mHeader;
+		u16 mReserved;
+		u16 mInternalPort;
+		u16 mExternalPort;
+		u32 mPortMappingLifetimeSeconds;
+	}sCreatePortMappingRequest;
+
+
+	typedef struct
+	{
+		sNatPmpPacketResultHeader mHeader;
+		u16 mInternalPort;
+		u16 mExternalPort;
+		u32 mPortMappingLifetimeSeconds;
+	}sCreatePortMappingResult;
+
+
+
+
+} // namespace net
+
+
+// Default alignment
+#ifdef _MSC_VER
+	#pragma pack( pop, packing )
+#endif
+#undef PACK_STRUCT
+
+
+#endif // NAT_PMP_MSGS_H

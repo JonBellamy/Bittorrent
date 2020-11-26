@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{57C3A760-3227-40CA-8B85-AAE52FEAACD0}</ProjectGuid>
+    <RootNamespace>BitTorrent_Dll</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\Meerkat\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\Meerkat\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bt</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Library;..\Library\3rdParty;..\Library\3rdParty\OpenSSL\include;..\Library\3rdParty\miniupnpc-1.5\include;..\Library\3rdParty\pthreadsWin32-2-8-0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;BITTORRENT_DLL_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ForcedIncludeFiles>types.h;./General/Printf.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;Winmm.lib;Iphlpapi.lib;libeay32MTd.lib;ssleay32MTd.lib;miniupnpcd.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)bt.dll</OutputFile>
+      <AdditionalLibraryDirectories>C:\Source\Library\3rdParty\OpenSSL\lib\VC\static;C:\Source\Library\3rdParty\miniupnpc-1.5\lib\msvc;C:\Source\Library\3rdParty\pthreadsWin32-2-8-0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>c:\source\\Library;C:\Source\Library\3rdParty;C:\Source\Library\3rdParty\OpenSSL\include;C:\Source\Library\3rdParty\miniupnpc-1.5\include;C:\Source\Library\3rdParty\pthreadsWin32-2-8-0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;BITTORRENT_DLL_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>types.h;./General/Printf.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;Winmm.lib;Iphlpapi.lib;libeay32MT.lib;ssleay32MT.lib;miniupnpc.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)bt.dll</OutputFile>
+      <AdditionalLibraryDirectories>C:\Source\Library\3rdParty\OpenSSL\lib\VC\static;C:\Source\Library\3rdParty\miniupnpc-1.5\lib\msvc;C:\Source\Library\3rdParty\pthreadsWin32-2-8-0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Library\General\Lock.cpp" />
+    <ClCompile Include="..\..\Library\General\Printf.cpp" />
+    <ClCompile Include="..\..\Library\General\StringUtil.cpp" />
+    <ClCompile Include="..\..\Library\General\_Assert.cpp" />
+    <ClCompile Include="..\..\Library\Network\Base64.cpp" />
+    <ClCompile Include="..\..\Library\Network\Upnp\UpnpIgd.cpp" />
+    <ClCompile Include="BitTorrent_Dll.cpp" />
+    <ClCompile Include="dllmain.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="MeerkatLock.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\Network\bytestream.cpp" />
+    <ClCompile Include="..\..\Library\Network\Dns.cpp" />
+    <ClCompile Include="..\..\Library\Network\HtmlPacketLog.cpp" />
+    <ClCompile Include="..\..\Library\Network\IpAddr.cpp" />
+    <ClCompile Include="..\..\Library\Network\NetworkAdaptorList.cpp" />
+    <ClCompile Include="..\..\Library\Network\SockAddr.cpp" />
+    <ClCompile Include="..\..\Library\Network\SslSocket.cpp" />
+    <ClCompile Include="..\..\Library\Network\TcpSocket.cpp" />
+    <ClCompile Include="..\..\Library\Network\UdpSocket.cpp" />
+    <ClCompile Include="..\..\Library\Network\Url.cpp" />
+    <ClCompile Include="..\..\Library\Network\WinSock.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\AnnounceManager.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrent.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrentManager.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrentMessages.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrentMetaFile.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BitTorrentPeer.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\FilePieceSet.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\MessagePump.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\Piece.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\RequestQueue.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\TorrentOptions.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\TorrentPacketLog.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedDictionary.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedInt.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedList.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedString.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedType.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\Dht.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\DhtPacketLog.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\DhtTask.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\DhtTaskManager.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\KrpcMsg.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\Node.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\NodeId.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\ResourceContactInfo.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\RoutingTable.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\DHT\TaskBehaviours.cpp" />
+    <ClCompile Include="..\..\Library\Network\BitTorrent\Mse\MessageStreamEncryption.cpp" />
+    <ClCompile Include="..\..\Library\Network\HTTP\HttpClient.cpp" />
+    <ClCompile Include="..\..\Library\Network\HTTP\HttpHeader.cpp" />
+    <ClCompile Include="..\..\Library\Network\HTTP\HttpMessage.cpp" />
+    <ClCompile Include="..\..\Library\Network\SOAP\Soap.cpp" />
+    <ClCompile Include="..\..\Library\Network\SOAP\SoapEnvelope.cpp" />
+    <ClCompile Include="..\..\Library\Network\SOAP\SoapTypes.cpp" />
+    <ClCompile Include="..\..\Library\File\file.cpp" />
+    <ClCompile Include="..\..\Library\File\FileHelpers.cpp" />
+    <ClCompile Include="..\..\Library\Containers\Bitfield.cpp" />
+    <ClCompile Include="..\..\Library\General\Rand.cpp" />
+    <ClCompile Include="..\..\Library\General\Timer.cpp" />
+    <ClCompile Include="..\..\Library\Math\MathHelpers.cpp" />
+    <ClCompile Include="..\..\Library\3rdParty\TinyXml\tinystr.cpp" />
+    <ClCompile Include="..\..\Library\3rdParty\TinyXml\tinyxml.cpp" />
+    <ClCompile Include="..\..\Library\3rdParty\TinyXml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\Library\3rdParty\TinyXml\tinyxmlparser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Library\General\CallbackSet.h" />
+    <ClInclude Include="..\..\Library\General\Lock.h" />
+    <ClInclude Include="..\..\Library\General\Printf.h" />
+    <ClInclude Include="..\..\Library\General\Singleton.h" />
+    <ClInclude Include="..\..\Library\General\StringUtil.h" />
+    <ClInclude Include="..\..\Library\General\_Assert.h" />
+    <ClInclude Include="..\..\Library\Network\Base64.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentCallbacks.h" />
+    <ClInclude Include="..\..\Library\Network\Upnp\UpnpIgd.h" />
+    <ClInclude Include="BitTorrent_Dll.h" />
+    <ClInclude Include="MeerkatLock.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\..\Library\Types.h" />
+    <ClInclude Include="..\..\Library\Network\bytestream.h" />
+    <ClInclude Include="..\..\Library\Network\Dns.h" />
+    <ClInclude Include="..\..\Library\Network\HtmlPacketLog.h" />
+    <ClInclude Include="..\..\Library\Network\IpAddr.h" />
+    <ClInclude Include="..\..\Library\Network\NetworkAdaptorList.h" />
+    <ClInclude Include="..\..\Library\Network\Ports.h" />
+    <ClInclude Include="..\..\Library\Network\SockAddr.h" />
+    <ClInclude Include="..\..\Library\Network\SslSocket.h" />
+    <ClInclude Include="..\..\Library\Network\TcpSocket.h" />
+    <ClInclude Include="..\..\Library\Network\UdpSocket.h" />
+    <ClInclude Include="..\..\Library\Network\Url.h" />
+    <ClInclude Include="..\..\Library\Network\WinSock.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\AnnounceManager.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrent.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentManager.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentMessages.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentMetaFile.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentPeer.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BitTorrentValues.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\FilePieceSet.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\MessagePump.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\Piece.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\RequestQueue.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\TorrentOptions.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\TorrentPacketLog.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedDictionary.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedInt.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedList.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedString.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\BEncoding\BencodedType.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\Dht.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\DhtPacketLog.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\DhtTask.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\DhtTaskManager.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\KrpcMsg.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\Node.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\NodeId.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\ResourceContactInfo.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\RoutingTable.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\SortObjects.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\DHT\TaskBehaviours.h" />
+    <ClInclude Include="..\..\Library\Network\BitTorrent\Mse\MessageStreamEncryption.h" />
+    <ClInclude Include="..\..\Library\Network\HTTP\HttpClient.h" />
+    <ClInclude Include="..\..\Library\Network\HTTP\HttpHeader.h" />
+    <ClInclude Include="..\..\Library\Network\HTTP\HttpMessage.h" />
+    <ClInclude Include="..\..\Library\Network\SOAP\Soap.h" />
+    <ClInclude Include="..\..\Library\Network\SOAP\SoapEnvelope.h" />
+    <ClInclude Include="..\..\Library\Network\SOAP\SoapTypes.h" />
+    <ClInclude Include="..\..\Library\File\file.h" />
+    <ClInclude Include="..\..\Library\File\FileHelpers.h" />
+    <ClInclude Include="..\..\Library\Containers\Bitfield.h" />
+    <ClInclude Include="..\..\Library\General\Endianness.h" />
+    <ClInclude Include="..\..\Library\General\Rand.h" />
+    <ClInclude Include="..\..\Library\General\Timer.h" />
+    <ClInclude Include="..\..\Library\Math\MathHelpers.h" />
+    <ClInclude Include="..\..\Library\3rdParty\TinyXml\tinystr.h" />
+    <ClInclude Include="..\..\Library\3rdParty\TinyXml\tinyxml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,152 @@
+#include "NatPmp.h"
+
+#include <assert.h>
+
+#include "NatPmpMsgs.h"
+#include "Network/Ports.h"
+#include "Network/NetworkAdaptorList.h"
+
+
+namespace net {
+
+
+static cNatPmp gNatPmp;
+
+cNatPmp& NatPmp()
+{	
+	return gNatPmp;
+}
+
+
+cNatPmp::cNatPmp()
+{
+
+
+}// END cNatPmp
+
+
+void cNatPmp::GetExternalIp(GetExternalIpCallback cb)
+{
+	cIpAddr defaultGateway = NetworkAdaptorList().DefaultGateway(0);
+	cSockAddr localAddr(NetworkAdaptorList().GetAdaptorIp(0), 11500);
+	cSockAddr remoteAddr(defaultGateway, NAT_PMP_PORT);
+	u8 buf[512];
+	memset(buf, 0, sizeof(buf));
+	
+	sNatPmpPacketHeader request;
+	request.mVersion = NAT_PMP_VERSION;
+	request.mOpCode = NAT_GET_EXTERNAL_IP;
+	assert(sizeof(sNatPmpPacketHeader) == 2);
+
+	mSocket.Open(localAddr, true);
+	mSocket.Connect(remoteAddr);
+	mSocket.Send(&request, sizeof(sNatPmpPacketHeader));
+
+	mSocket.Recv(buf, sizeof(buf));
+
+
+	sGetExternalIpResult* result = reinterpret_cast<sGetExternalIpResult*> (buf);
+	result->mHeader.mResultCode = ntohs(result->mHeader.mResultCode);
+	result->mHeader.mSecondsSinceGatewayRebooted = ntohl(result->mHeader.mSecondsSinceGatewayRebooted);	
+
+
+	cIpAddr ip(result->mIpAddr);
+
+	if(cb)
+	{
+		if(result->mHeader.mResultCode != NAT_SUCCESS)
+		{
+			assert(0);
+			cb(false, ip);
+		}
+		else
+		{
+			cb(true, ip);
+		}
+	}
+}// END GetExternalIp
+
+
+
+void cNatPmp::CreateTcpPortMapping(u16 internalPort, u16 externalPort, PortMappingCallback cb)
+{
+	CreatePortMapping(NAT_CREATE_TCP_PORT_MAPPING, internalPort, externalPort, DEFAULT_PORT_MAPPING_DURATION, cb);
+}// END CreateTcpPortMapping
+
+
+
+void cNatPmp::CreateUdpPortMapping(u16 internalPort, u16 externalPort, PortMappingCallback cb)
+{
+	CreatePortMapping(NAT_CREATE_UDP_PORT_MAPPING, internalPort, externalPort, DEFAULT_PORT_MAPPING_DURATION, cb);
+}// END CreateUdpPortMapping
+
+
+
+// A client requests explicit deletion of a mapping by sending a message to the NAT gateway 
+// requesting the mapping, with the Requested Lifetime in Seconds set to 0.
+void cNatPmp::DestroyTcpPortMapping(u16 internalPort, u16 externalPort, PortMappingCallback cb)
+{
+	CreatePortMapping(NAT_CREATE_TCP_PORT_MAPPING, internalPort, externalPort, 0, cb);
+}// END DestroyTcpPortMapping
+
+
+
+void cNatPmp::DestroyUdpPortMapping(u16 internalPort, u16 externalPort, PortMappingCallback cb)
+{
+	CreatePortMapping(NAT_CREATE_UDP_PORT_MAPPING, internalPort, externalPort, 0, cb);
+}// END DestroyUdpPortMapping
+
+
+
+// The Internal Port is set to the local port on which the client is listening. If the client would prefer to have a high-numbered "anonymous"
+// external port assigned, then it should set the Requested External Port to zero, which indicates to the gateway that it should allocate
+// a high-numbered port of its choosing.
+void cNatPmp::CreatePortMapping(u32 opCode, u16 internalPort, u16 externalPort, u32 duration, PortMappingCallback cb)
+{
+	assert(opCode == NAT_CREATE_UDP_PORT_MAPPING || opCode == NAT_CREATE_TCP_PORT_MAPPING);
+
+	cIpAddr defaultGateway = NetworkAdaptorList().DefaultGateway(0);
+	cSockAddr localAddr(NetworkAdaptorList().GetAdaptorIp(0), 11500);
+	cSockAddr remoteAddr(defaultGateway, NAT_PMP_PORT);
+	u8 buf[512];
+	memset(buf, 0, sizeof(buf));
+
+	sCreatePortMappingRequest request;
+	memset(&request, 0, sizeof(sCreatePortMappingRequest));
+	request.mHeader.mVersion = NAT_PMP_VERSION;
+	request.mHeader.mOpCode = opCode;
+	request.mReserved = 0;
+	request.mInternalPort = htons(internalPort);
+	request.mExternalPort = htons(externalPort);
+	request.mPortMappingLifetimeSeconds = htonl(duration);
+
+	mSocket.Open(localAddr, true);
+	mSocket.Connect(remoteAddr);
+	mSocket.Send(&request, sizeof(sNatPmpPacketHeader));
+
+	mSocket.Recv(buf, sizeof(buf));
+
+	sCreatePortMappingResult* result = reinterpret_cast<sCreatePortMappingResult*> (buf);
+	result->mHeader.mResultCode = ntohs(result->mHeader.mResultCode);
+	result->mHeader.mSecondsSinceGatewayRebooted = ntohl(result->mHeader.mSecondsSinceGatewayRebooted);	
+	result->mInternalPort = ntohs(result->mInternalPort);
+	result->mExternalPort = ntohs(result->mExternalPort);
+	result->mPortMappingLifetimeSeconds = ntohl(result->mPortMappingLifetimeSeconds);	
+
+	if(cb)
+	{
+		if(result->mHeader.mResultCode != NAT_SUCCESS)
+		{
+			assert(0);
+			cb(false, 0, 0);
+		}
+		else
+		{
+			cb(true, result->mInternalPort, result->mExternalPort);
+		}
+	}
+}// END CreatePortMapping
+
+
+} // namespace net
+

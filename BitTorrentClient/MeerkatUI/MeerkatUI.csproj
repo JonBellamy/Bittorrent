@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0A250036-9209-498F-85A0-F1C95496EF00}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MeerkatUI</RootNamespace>
+    <AssemblyName>Meerkat</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Meerkat\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AboutWindowViewModel.cs" />
+    <Compile Include="Commands\AddTorrentCommand.cs" />
+    <Compile Include="Commands\AllowUnencryptedConnectionsCommand.cs" />
+    <Compile Include="Commands\OpenContainingFolderCommand.cs" />
+    <Compile Include="Commands\PauseTorrentCommand.cs" />
+    <Compile Include="Commands\RemoveAndDeleteTorrentCommand.cs" />
+    <Compile Include="Commands\RemoveTorrentCommand.cs" />
+    <Compile Include="Commands\StartTorrentCommand.cs" />
+    <Compile Include="Commands\StopTorrentCommand.cs" />
+    <Compile Include="Commands\TorrentRecheckCommand.cs" />
+    <Compile Include="Converters\TorrentConnectionTypeConverter.cs" />
+    <Compile Include="Converters\TorrentFlagsConverter.cs" />
+    <Compile Include="Converters\TorrentPeerIdConverter.cs" />
+    <Compile Include="Converters\TorrentRequestsConverter.cs" />
+    <Compile Include="Services\FolderBrowerService.cs" />
+    <Compile Include="Services\OpenFileService.cs" />
+    <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeerkatWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\TorrentCommand.cs" />
+    <Compile Include="Converters\ByteArrayToHexStringConverter.cs" />
+    <Compile Include="Converters\BytesToKbsConverter.cs" />
+    <Compile Include="Converters\BytesToMegaBytesConverter.cs" />
+    <Compile Include="Converters\PercentageConverter.cs" />
+    <Compile Include="Converters\SecondsFromUnixEpochConverter.cs" />
+    <Compile Include="Converters\SecondsToTimeSpanConverter.cs" />
+    <Compile Include="Converters\TorrentPiecesConverter.cs" />
+    <Compile Include="Converters\TorrentStateConverter.cs" />
+    <Compile Include="MeerkatWindow.xaml.cs">
+      <DependentUpon>MeerkatWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MeerkatWindowViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MeerkatBindings\MeerkatBindings.csproj">
+      <Project>{F4989085-B42F-4FFD-9B07-9A0D85287A47}</Project>
+      <Name>MeerkatBindings</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\forward.ico" />
+    <Resource Include="Icons\Options.ico" />
+    <None Include="Icons\pause.ico" />
+    <Resource Include="Icons\Tab_Pieces.ico" />
+    <None Include="Icons\play.ico" />
+    <Resource Include="Icons\SecureConnection.ico" />
+    <Resource Include="Icons\stop.ico" />
+    <Resource Include="Icons\Tab_Announce.ico" />
+    <Resource Include="Icons\Tab_Files.ico" />
+    <Resource Include="Icons\Tab_General.ico" />
+    <Resource Include="Icons\Tab_Peers.ico" />
+    <Resource Include="Icons\Tab_TTY.ico" />
+    <Resource Include="Icons\Timon.ico" />
+    <Resource Include="Icons\UnSecureConnection.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\add.ico" />
+    <Resource Include="Icons\remove.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\pause32x32.png" />
+    <Resource Include="Icons\play32x32.png" />
+    <Resource Include="Icons\stop32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\meerkat.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
