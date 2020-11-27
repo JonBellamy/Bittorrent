@@ -63,7 +63,7 @@ cBencodedType* cBencodedString::Clone()
 
 const cBencodedString& cBencodedString::operator= (const cBencodedString& rhs)
 {
-	assert(typeid(rhs) == typeid(*this));
+	//assert(typeid(rhs) == typeid(*this));
 	assert(this != &rhs);
 	const cBencodedString& rhsString = static_cast<const cBencodedString&> (rhs);
 

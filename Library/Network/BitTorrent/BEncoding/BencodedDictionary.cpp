@@ -50,7 +50,7 @@ cBencodedType* cBencodedDictionary::Clone()
 
 const cBencodedDictionary& cBencodedDictionary::operator= (const cBencodedDictionary& rhs)
 {
-	assert(typeid(rhs) == typeid(*this));
+	//assert(typeid(rhs) == typeid(*this));
 	assert(this != &rhs);
 	const cBencodedDictionary& rhsDict = static_cast<const cBencodedDictionary&> (rhs);
 

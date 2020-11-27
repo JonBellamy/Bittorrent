@@ -2,8 +2,9 @@
 
 
 
-void cLock::InitLock(pthread_mutex_t& mutex)
+void cLock::InitLock(/*pthread_mutex_t& mutex*/)
 {
+	/*
 	int ret;
 	pthread_mutexattr_t    attr;
 	
@@ -18,5 +19,6 @@ void cLock::InitLock(pthread_mutex_t& mutex)
 
 	ret = pthread_mutexattr_destroy(&attr);
 	ASSERT(ret == 0);
+	*/
 }
 

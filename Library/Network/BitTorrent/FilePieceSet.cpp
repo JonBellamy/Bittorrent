@@ -288,9 +288,10 @@ bool cFilePieceSet::OpenAllFiles(bool createFiles)
 	{
 		// If we get here, the files are all open but they are zero size, we need to write a byte to create the files at the correct size
 		// this can take some time, so we thread it.	
-		int rc = pthread_create(&mFileCreationThread, NULL, CreateFiles, this);
-		
-		ASSERT(rc == 0);
+		//int rc = pthread_create(&mFileCreationThread, NULL, CreateFiles, this);
+		//ASSERT(rc == 0);
+
+		CreateFiles(NULL);
 	}
 	else
 	{
@@ -333,7 +334,7 @@ void* cFilePieceSet::CreateFiles(void* pParam)
 
 void cFilePieceSet::CancelFileCreation()
 {
-	pthread_cancel(mFileCreationThread);
+	//pthread_cancel(mFileCreationThread);
 }// END CancelFileCreation
 
 

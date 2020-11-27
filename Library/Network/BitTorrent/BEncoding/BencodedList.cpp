@@ -46,7 +46,7 @@ cBencodedType* cBencodedList::Clone()
 
 const cBencodedList& cBencodedList::operator= (const cBencodedList& rhs)
 {
-	assert(typeid(rhs) == typeid(*this));
+	//assert(typeid(rhs) == typeid(*this));
 	assert(this != &rhs);
 
 	assert(mList.empty());

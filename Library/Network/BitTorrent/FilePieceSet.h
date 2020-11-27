@@ -11,8 +11,6 @@
 #include <string>
 #include <vector>
 
-#include <pthread.h>
-
 #include "File/file.h"
 #include "Network/BitTorrent/BitTorrentMetaFile.h"
 #include "Network/BitTorrent/BEncoding/BencodedDictionary.h"
@@ -125,7 +123,7 @@ private:
 	// Set when the files are created / opened
 	FileCreationResult mFilesCreated;
 
-	pthread_t mFileCreationThread;
+	//pthread_t mFileCreationThread;
 };
 
 

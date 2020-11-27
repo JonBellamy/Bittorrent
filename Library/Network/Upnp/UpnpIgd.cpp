@@ -1,6 +1,6 @@
 #include "UpnpIgd.h"
 
-#define USE_THREAD_INIT 1
+#define USE_THREAD_INIT 0
 
 
 #include <assert.h>

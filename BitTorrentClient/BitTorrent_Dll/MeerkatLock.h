@@ -9,14 +9,14 @@ class cMeerkatLock : public cLock
 {
 public:
 	cMeerkatLock(bool autoLock=true)
-	: cLock(mMeerkatMutex, autoLock)
+	: cLock(/*mMeerkatMutex,*/ autoLock)
 	{
 	}
 
-	static void InitLock() { cLock::InitLock(mMeerkatMutex); }
+	static void InitLock() { cLock::InitLock(/*mMeerkatMutex*/); }
 
 private:
-	static pthread_mutex_t mMeerkatMutex;
+	//static pthread_mutex_t mMeerkatMutex;
 };
 
 

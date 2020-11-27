@@ -20,12 +20,12 @@
 // TODO : HUGE PROBLEM WITH THIS. We are returning ptr's to nodes from the routing table which is an stl list which WILL expand and invalidate the ptr's. We need to 
 // just use the vector of nodes below and remove this!!!!!!!!!!!!!!!
 // STL list may be saving our ass as it invalidates erased portions but still ...
-typedef std::vector<const cDhtNode*> DhtNodePtrVector;
+typedef std::vector<cDhtNode*> DhtNodePtrVector;
 typedef DhtNodePtrVector::iterator DhtNodePtrVectorIterator;
 typedef DhtNodePtrVector::const_iterator DhtNodePtrVectorConstIterator;
 
 
-typedef std::vector<const cDhtNode> DhtNodeVector;
+typedef std::vector<cDhtNode> DhtNodeVector;
 typedef DhtNodeVector::iterator DhtNodeVectorIterator;
 typedef DhtNodeVector::const_iterator DhtNodeVectorConstIterator;
 
@@ -62,7 +62,7 @@ public:
 
 	bool HasEnoughCloseNodes() const;
 
-	void FurthestCloseNodeDistance(cDhtNode* pNodeOut, u32* distanceOut) const;
+	void FurthestCloseNodeDistance(cDhtNode* pNodeOut, u32* distanceOut);
 
 	bool InsertNode(const cDhtNode& node);
 	bool RemoveNode(const cDhtNodeId& nodeId);
@@ -74,26 +74,26 @@ public:
 	bool Node(u32 nodeIndex, cDhtNode* nodeOut);
 
 
-	void AllNodesWithInvalidId(DhtNodePtrVector* pOutVector) const;
+	void AllNodesWithInvalidId(DhtNodePtrVector* pOutVector);
 
 
 	// returns an ordered vector with the required nodes
-	void CloseNodes(DhtNodePtrVector* pOutVector) const;
-	void FarNodes(DhtNodePtrVector* pOutVector) const;
+	void CloseNodes(DhtNodePtrVector* pOutVector);
+	void FarNodes(DhtNodePtrVector* pOutVector);
 
 	// When a node wants to find peers for a torrent, it uses the distance metric to compare the infohash of the torrent with the IDs of the nodes in its own routing table. 
 	// It then contacts the nodes it knows about with IDs closest to the infohash and asks them for the contact information of peers currently downloading the torrent.
-	void ClosestNodeToInfoHash(const cDhtResourceId& infoHash, u32 maxNodesToReturn, DhtNodePtrVector* pOutVector) const;
+	void ClosestNodeToInfoHash(const cDhtResourceId& infoHash, u32 maxNodesToReturn, DhtNodePtrVector* pOutVector);
 
 	u32 Size() const { return static_cast<u32> (mRoutingTable.size()); }
 
 
-	void DebugPrint() const;
+	void DebugPrint();
 
 private:
 
 	// returns a vector containing the current routing table sorted by distance to our local node.
-	void RoutingTableNodesSortedByDistanceToNode(const cDhtNodeId& node, DhtNodePtrVector* pOutVector) const;
+	void RoutingTableNodesSortedByDistanceToNode(const cDhtNodeId& node, DhtNodePtrVector* pOutVector);
 
 	friend class cDht;
 

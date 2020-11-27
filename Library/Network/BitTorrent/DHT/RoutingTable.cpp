@@ -196,7 +196,7 @@ bool cDhtRoutingTable::HasEnoughCloseNodes() const
 
 
 
-void cDhtRoutingTable::FurthestCloseNodeDistance(cDhtNode* pNodeOut, u32* distanceOut) const
+void cDhtRoutingTable::FurthestCloseNodeDistance(cDhtNode* pNodeOut, u32* distanceOut)
 {
 	DhtNodePtrVector closeNodes;
 	CloseNodes(&closeNodes);
@@ -333,15 +333,15 @@ bool cDhtRoutingTable::Node(u32 nodeIndex, cDhtNode* nodeOut)
 
 
 
-void cDhtRoutingTable::AllNodesWithInvalidId(DhtNodePtrVector* pOutVector) const
+void cDhtRoutingTable::AllNodesWithInvalidId(DhtNodePtrVector* pOutVector)
 {
 	pOutVector->clear();
-	RoutingTableConstIterator constIter;
-	for(constIter = mRoutingTable.begin(); constIter != mRoutingTable.end(); constIter++)
+	RoutingTableIterator iter;
+	for(iter = mRoutingTable.begin(); iter != mRoutingTable.end(); iter++)
 	{
-		if((*constIter).Id().IsValid() == false)
+		if((*iter).Id().IsValid() == false)
 		{
-			pOutVector->push_back(&(*constIter));
+			pOutVector->push_back(&(*iter));
 		}
 	}
 }// END AllNodesWithInvalidId
@@ -349,15 +349,15 @@ void cDhtRoutingTable::AllNodesWithInvalidId(DhtNodePtrVector* pOutVector) const
 
 
 // returns a vector containing the current routing table sorted by distance to our local node.
-void cDhtRoutingTable::RoutingTableNodesSortedByDistanceToNode(const cDhtNodeId& node, DhtNodePtrVector* pOutVector) const
+void cDhtRoutingTable::RoutingTableNodesSortedByDistanceToNode(const cDhtNodeId& node, DhtNodePtrVector* pOutVector)
 {
 	DistanceFuncObj_ForNodePtrs cb(node);
 	pOutVector->clear();
 
-	RoutingTableConstIterator constIter;
-	for(constIter = mRoutingTable.begin(); constIter != mRoutingTable.end(); constIter++)
+	RoutingTableIterator iter;
+	for(iter = mRoutingTable.begin(); iter != mRoutingTable.end(); iter++)
 	{
-		pOutVector->push_back(&(*constIter));
+		pOutVector->push_back(&(*iter));
 	}
 	sort(pOutVector->begin(), pOutVector->end(), cb);
 }// END RoutingTableNodesSortedByDistanceToNode
@@ -365,7 +365,7 @@ void cDhtRoutingTable::RoutingTableNodesSortedByDistanceToNode(const cDhtNodeId&
 
 
 // returns an ordered vector with the required nodes
-void cDhtRoutingTable::CloseNodes(DhtNodePtrVector* pOutVector) const
+void cDhtRoutingTable::CloseNodes(DhtNodePtrVector* pOutVector)
 {
 	DhtNodePtrVector sortedByDistanceToHashList;
 	RoutingTableNodesSortedByDistanceToNode(BitTorrentManager().DhtTaskManager().Dht().LocalNodeId(), &sortedByDistanceToHashList);	
@@ -374,7 +374,7 @@ void cDhtRoutingTable::CloseNodes(DhtNodePtrVector* pOutVector) const
 	DhtNodePtrVectorIterator iter;
 	for(iter = sortedByDistanceToHashList.begin(); iter != sortedByDistanceToHashList.end(); iter++)
 	{
-		const cDhtNode* node = *iter;
+		cDhtNode* node = *iter;
 		
 		u32 distanceToNode = DistanceBetweenDhtNodes(BitTorrentManager().DhtTaskManager().Dht().LocalNodeId(), node->Id());
 		bool nodeIsClose = (distanceToNode <= CLOSE_NODE_DISTANCE);
@@ -387,7 +387,7 @@ void cDhtRoutingTable::CloseNodes(DhtNodePtrVector* pOutVector) const
 
 
 
-void cDhtRoutingTable::FarNodes(DhtNodePtrVector* pOutVector) const
+void cDhtRoutingTable::FarNodes(DhtNodePtrVector* pOutVector)
 {
 	DhtNodePtrVector sortedByDistanceToHashList;
 	RoutingTableNodesSortedByDistanceToNode(BitTorrentManager().DhtTaskManager().Dht().LocalNodeId(), &sortedByDistanceToHashList);	
@@ -396,7 +396,7 @@ void cDhtRoutingTable::FarNodes(DhtNodePtrVector* pOutVector) const
 	DhtNodePtrVectorIterator iter;
 	for(iter = sortedByDistanceToHashList.begin(); iter != sortedByDistanceToHashList.end(); iter++)
 	{
-		const cDhtNode* node = *iter;
+		cDhtNode* node = *iter;
 
 		u32 distanceToNode = DistanceBetweenDhtNodes(BitTorrentManager().DhtTaskManager().Dht().LocalNodeId(), node->Id());
 		bool nodeIsClose = (distanceToNode > CLOSE_NODE_DISTANCE);
@@ -411,7 +411,7 @@ void cDhtRoutingTable::FarNodes(DhtNodePtrVector* pOutVector) const
 
 // When a node wants to find peers for a torrent, it uses the distance metric to compare the infohash of the torrent with the IDs of the nodes in its own routing table. 
 // It then contacts the nodes it knows about with IDs closest to the infohash and asks them for the contact information of peers currently downloading the torrent.
-void cDhtRoutingTable::ClosestNodeToInfoHash(const cDhtResourceId& resourceId, u32 maxNodesToReturn, DhtNodePtrVector* pOutVector) const
+void cDhtRoutingTable::ClosestNodeToInfoHash(const cDhtResourceId& resourceId, u32 maxNodesToReturn, DhtNodePtrVector* pOutVector)
 {	
 	DhtNodePtrVector sortedByDistanceToHashList;
 	RoutingTableNodesSortedByDistanceToNode(resourceId, &sortedByDistanceToHashList);	
@@ -428,7 +428,7 @@ void cDhtRoutingTable::ClosestNodeToInfoHash(const cDhtResourceId& resourceId, u
 
 
 
-void cDhtRoutingTable::DebugPrint() const
+void cDhtRoutingTable::DebugPrint()
 {
 	DhtNodePtrVector sortedByDistanceToHashList;
 	RoutingTableNodesSortedByDistanceToNode(BitTorrentManager().DhtTaskManager().Dht().LocalNodeId(), &sortedByDistanceToHashList);	
